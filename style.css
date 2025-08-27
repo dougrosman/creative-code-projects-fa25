@@ -1,4 +1,11 @@
+canvas {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: -1;
+}
+
 h1 {
     font-size: 40px;
-    color: rgb(200, 100, 10);
+    color: rgb(79, 120, 70);
 }
