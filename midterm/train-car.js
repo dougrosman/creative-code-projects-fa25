@@ -18,31 +18,31 @@ class TrainCar {
         translate(0, sin(frameCount*15, -1, 1, -20, 20))
         rect(0, 0, this.width, this.height, this.cornerRadius)
         pop()
+
+        // create wheels
+        this.drawWheel(this.width/4)
+        this.drawWheel(3*this.width/4)
+
+
+    }
+
+    drawWheel(location) {
         fill(80)
-
-        // wheel 1
         push()
-            translate(this.width/4, this.height)
-            rotate(this.rotateAmount-=this.rotateSpeed)
-            circle(0, 0, this.wheelSize)
-            for(let i = 0; i < this.numSpokes; i++) {
-                push()
-                rectMode(CENTER)
-                angleMode(DEGREES)
-                strokeWeight(0.5)
-                //translate(this.wheelSize/2, this.wheelSize/2)
-                rotate(map(i, 0, this.numSpokes, 0, 180))
-                rect(0, 0, this.wheelSize, 0.5)
-                pop()
-            }
+        translate(location, this.height)
+        rotate(this.rotateAmount-=this.rotateSpeed)
+        circle(0, 0, this.wheelSize)
+        for(let i = 0; i < this.numSpokes; i++) {
+            push()
+            rectMode(CENTER)
+            angleMode(DEGREES)
+            strokeWeight(0.5)
+            
+            rotate(map(i, 0, this.numSpokes, 0, 180))
+            rect(0, 0, this.wheelSize, 0.5)
+            pop()
+        }
         pop()
-
-        // wheel 2
-        push()
-            translate(3*this.width/4, this.height)
-            circle(0, 0, this.carSize/6)
-        pop()
-
     }
 
 }
