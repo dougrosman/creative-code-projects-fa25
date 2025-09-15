@@ -1,32 +1,41 @@
-let car;
+let train;
+let tracks = [];
+let trainCounter = 0;
+const trackSpacing = 80;
 
 function setup() {
     createCanvas(windowWidth, windowHeight)
+    tracks = createTracks(trackSpacing);
 
-    car = new TrainCar(100, 2, true);
-
+    //car = new TrainCar(100, 2, true);
+    train = new Train(trainCounter++, tracks, trackSpacing)
+    console.log(train.moveRight)
 
 }
 
 function draw() {
-background(255)
-    push()
-    translate(100, 100);
-    car.draw()
-    pop()
+    background(255)
+    drawTracks(tracks)
+
+    train.draw()
+    train.update()
 }
 
-function windowResized() {
-    resizeCanvas(windowWidth, windowHeight)
-    //createEnvironment()
-}
-
-function createEnvironment() {
-    const spacing = 80;
-    const numTracks = floor(height/spacing);
+function createTracks(spacing) {
+    const numTracks = floor(height/spacing) - 1;
+    let trackPositions = [];
     
-    for(let i = numTracks; i > 0; i--) {
-        line(0, i * spacing, width, i * spacing)
-        line(0, i * spacing - 5, width, i * spacing - 5)
+    for(let i = 0; i < numTracks; i++) {
+        trackPositions.push((i+1)*spacing)
+    }
+    return trackPositions;
+ }
+
+ function drawTracks(tracks) {
+    for(let i = 0; i < tracks.length; i++) {
+        const trackY = tracks[i]
+        text(i, 5, trackY)
+        line(0, trackY, width, trackY)
+        //line(0, i * spacing - 5, width, i * spacing - 5)
     }
  }
