@@ -3,7 +3,7 @@ let car;
 function setup() {
     createCanvas(windowWidth, windowHeight)
 
-    car = new TrainCar(100, 2);
+    car = new TrainCar(100, 2, true);
 
 
 }
