@@ -1,8 +1,9 @@
 class TrainCar {
-    constructor(carWidth, speed, carNumber) {
-        colorMode(HSL)
-        this.color = color(random(360), 100, 50);
-        this.cornerRadius = random(3, 12);
+    constructor(carWidth, speed, carNumber, color, moveRight) {
+        // colorMode(HSL)
+        // this.color = color(random(360), 100, 50);
+        this.color = color
+        this.cornerRadius = 3;
         this.width = carWidth;
         this.height = carWidth/3;
         this.rotateSpeed = speed
@@ -10,19 +11,30 @@ class TrainCar {
         this.numSpokes = 6;
         this.wheelSize = this.width/6;
         this.carNumber = carNumber;
+        this.moveRight = moveRight
     }
 
     draw(position) {
         fill(this.color)
         push()
-            translate(position.x, position.y)
+            translate(position.x, position.y-this.height-this.wheelSize/4)
             push()
+                // bob up and down
                 translate(0, sin(frameCount*15, -1, 1, -20, 20))
                 if(this.carNumber === 0) {
-                    rect(0, 0, this.width, this.height, this.cornerRadius*4, this.cornerRadius, this.cornerRadius, this.cornerRadius)
+                    if(this.moveRight){
+                        rect(0, 0, this.width, this.height, this.cornerRadius, this.cornerRadius*4, this.cornerRadius, this.cornerRadius)
+                    } else {
+                        rect(0, 0, this.width, this.height, this.cornerRadius*4, this.cornerRadius, this.cornerRadius, this.cornerRadius)
+                    }
+                    
                 } else {
                     rect(0, 0, this.width, this.height, this.cornerRadius)
                 }
+                textAlign(CENTER)
+                textSize(20)
+                fill(255)
+                text(this.carNumber, this.width/2, this.height/1.5)
             pop()
         
 
