@@ -15,17 +15,29 @@ class TrainCar {
     }
 
     draw(position) {
-        fill(this.color)
+        
         push()
             translate(position.x, position.y-this.height-this.wheelSize/4)
+            // create wheels
+            this.drawWheel(1*this.width/10)
+            this.drawWheel(2.5*this.width/10)
+            this.drawWheel(7.5*this.width/10)
+            this.drawWheel(9*this.width/10)
+            fill(this.color)
             push()
                 // bob up and down
                 translate(0, sin(frameCount*10, -1, 1, -20, 20))
                 if(this.carNumber === 0) {
                     if(this.moveRight){
                         rect(0, 0, this.width, this.height, this.cornerRadius, this.cornerRadius*10, this.cornerRadius, this.cornerRadius)
+                        // window
+                        fill(90)
+                        rect(3*this.width/4 + 2, 2, this.width/4, this.width/4, this.cornerRadius, this.cornerRadius*10, this.cornerRadius, this.cornerRadius)
                     } else {
                         rect(0, 0, this.width, this.height, this.cornerRadius*10, this.cornerRadius, this.cornerRadius, this.cornerRadius)
+                        // window
+                        fill(90)
+                        rect(-2, 2, this.width/4, this.width/4, this.cornerRadius*10, this.cornerRadius, this.cornerRadius, this.cornerRadius)
                     }
                     
                 } else {
@@ -38,17 +50,13 @@ class TrainCar {
             pop()
         
 
-        // create wheels
-        this.drawWheel(1*this.width/10)
-        this.drawWheel(2.5*this.width/10)
-        this.drawWheel(7.5*this.width/10)
-        this.drawWheel(9*this.width/10)
+        
         pop()
 
     }
 
     drawWheel(location) {
-        fill(200)
+        fill(255)
         push()
         translate(location, this.height)
         rotate(this.rotateAmount+=this.rotateSpeed)
@@ -57,10 +65,11 @@ class TrainCar {
             push()
             rectMode(CENTER)
             angleMode(DEGREES)
+            stroke(0)
             strokeWeight(0.5)
             
             rotate(map(i, 0, this.numSpokes, 0, 180))
-            rect(0, 0, this.wheelSize, 0.5)
+            rect(0, 0, this.wheelSize-4, 0.5)
             pop()
         }
         pop()

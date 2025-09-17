@@ -1,7 +1,7 @@
 let trains = [];
 let tracks = [];
 let trainCounter = 0;
-const trackSpacing = 60;
+const trackSpacing = 80;
 let whistle;
 let numTracks;
 let colorPalettes;
@@ -16,20 +16,22 @@ function setup() {
   tracks = createTracks(trackSpacing, numTracks);
   colorPalettes = createColorPalettes()
 
-  for (let i = 0; i < numTracks; i++) {
-    trains.push(new Train(trainCounter++, tracks, trackSpacing, i, random(colorPalettes)));
+  for (let trackNumber = 0; trackNumber < numTracks; trackNumber++) {
+    trains.push(new Train(trainCounter++, tracks, trackSpacing, trackNumber, random(colorPalettes)));
   }
 }
 
 function draw() {
-  background(255);
+  background(90);
   drawTracks(tracks);
 
   for (let t of trains) {
     t.draw();
     t.update();
   }
+
   checkTrainProximity(trains);
+  removeTrains();
 }
 
 function createTracks(spacing, numTracks) {
@@ -85,6 +87,24 @@ function checkTrainProximity(trains) {
       }
     }
   }
+}
+
+function windowResized() {
+    numTracks = floor(height / (trackSpacing / 1.5));
+    tracks = createTracks(trackSpacing, numTracks);
+}
+
+function removeTrains() {
+
+    for(let i = 0; i < trains.length; i++) {
+        const train = trains[i];
+        if(train.remove == true) {
+            const trackNumber = train.trackNumber;
+            trains.splice(i, 1)
+            trains.push(new Train(trainCounter++, tracks, trackSpacing, trackNumber, random(colorPalettes)));
+            console.log(trackNumber)
+        }
+    }
 }
 
 function createColorPalettes() {

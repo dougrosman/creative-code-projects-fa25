@@ -15,7 +15,7 @@ class Train {
         //this.trackNumber = floor(random(tracks.length))
         this.trackNumber = trackNumber
         this.moveRight = random(1) < 0.5 ? true : false
-        this.speed = this.moveRight ? random(1, 4): -random(1, 4)
+        this.speed = this.moveRight ? random(1, 3): -random(1, 3)
         this.trainLength = (this.numCars * carWidth) + (this.numCouplers * this.couplerWidth)
 
         const xPos = this.moveRight ? -this.trainLength : width + this.carWidth;
@@ -24,7 +24,7 @@ class Train {
 
         this.hornBlows = []; // which trains this train has honked at
         this.hasBlown = false;
-        
+        this.remove = false;
         this.cars = this.createTrain();
     }
 
@@ -43,9 +43,8 @@ class Train {
 
     // all the calculations that need to happen
     update() {
-        // checkTrainProximity()
-        // removeTrain()
         this.position.x += this.speed;
+        this.removeTrain()
     }
 
     draw() {
@@ -57,12 +56,22 @@ class Train {
             } else {
                 carXPosition = this.position.x + carPosition;
             }
-            const finalPostion = createVector(carXPosition, this.position.y+3)
+            const finalPostion = createVector(carXPosition, this.position.y+2)
             car.draw(finalPostion)
         })
     }
 
-    
+    removeTrain() {
+        if(this.moveRight){
+            if(this.position.x - this.trainLength > width) {
+                this.remove = true;
+            }
+        } else {
+            if(this.position.x + this.trainLength < 0) {
+                this.remove = true;
+            }
+        }
+    }
 
 
 }
