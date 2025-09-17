@@ -1,7 +1,7 @@
 let trains = [];
 let tracks = [];
 let trainCounter = 0;
-const trackSpacing = 60;
+const trackSpacing = 120;
 let whistle;
 let numTracks;
 let colorPalettes;
@@ -79,7 +79,7 @@ function checkTrainProximity(trains) {
       if (i != j) {
         if (
           currentTrain.position.dist(checkTrain.position) <
-            trackSpacing * 1.8 &&
+            trackSpacing * 1.5 &&
           currentTrain.moveRight != checkTrain.moveRight
         ) {
           fill(0);
