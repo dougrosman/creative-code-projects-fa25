@@ -1,7 +1,7 @@
 let trains = [];
 let tracks = [];
 let trainCounter = 0;
-const trackSpacing = 120;
+const trackSpacing = 80;
 let whistle;
 let numTracks;
 let colorPalettes;
