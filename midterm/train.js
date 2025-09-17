@@ -1,9 +1,9 @@
 class Train {
 
-    constructor(id, tracks, carWidth, trackNumber, palette) {
+    constructor(id, tracks, carWidth, trackNumber, palette, greeting) {
         this.trainId = id;
         this.carWidth = carWidth;
-        this.numCars = floor(random(2, 10))
+        this.numCars = floor(random(2, 20))
 
         this.couplerWidth = 10;
         this.numCouplers = this.numCars-1
@@ -26,6 +26,7 @@ class Train {
         this.hasBlown = false;
         this.remove = false;
         this.cars = this.createTrain();
+        this.greeting = greeting
     }
 
 
@@ -33,9 +34,9 @@ class Train {
         let cars = []
         for(let i = 0; i < this.numCars; i++) {
             if(this.moveRight){
-                cars.unshift(new TrainCar(this.carWidth, this.speed, i, random(this.colorPalette), this.moveRight))    
+                cars.unshift(new TrainCar(this.trainId, this.carWidth, this.speed, i, random(this.colorPalette), this.moveRight, this.couplerWidth))    
             } else {
-                cars.push(new TrainCar(this.carWidth, this.speed, i, random(this.colorPalette), this.moveRight))
+                cars.push(new TrainCar(this.trainId, this.carWidth, this.speed, i, random(this.colorPalette), this.moveRight, this.couplerWidth))
             }
         }
         return cars;
