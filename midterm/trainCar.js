@@ -31,16 +31,16 @@ class TrainCar {
                 } else {
                     rect(0, 0, this.width, this.height, this.cornerRadius)
                 }
-                textAlign(CENTER)
-                textSize(20)
-                fill(255)
-                text(this.carNumber, this.width/2, this.height/1.5)
+                // textAlign(CENTER)
+                // textSize(20)
+                // fill(255)
+                // text(this.carNumber, this.width/2, this.height/1.5)
             pop()
         
 
         // create wheels
-        this.drawWheel(this.width/4)
-        this.drawWheel(3*this.width/4)
+        this.drawWheel(this.width/5)
+        this.drawWheel(4*this.width/5)
         pop()
 
     }

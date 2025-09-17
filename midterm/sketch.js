@@ -1,8 +1,9 @@
 let trains = [];
 let tracks = [];
 let trainCounter = 0;
-const trackSpacing = 80;
+const trackSpacing = 50;
 let whistle;
+let numTracks;
 
 function preload() {
     whistle = loadSound('sound_files/choo_choo_fast.mp3')
@@ -10,10 +11,10 @@ function preload() {
 
 function setup() {
     createCanvas(windowWidth, windowHeight)
-    tracks = createTracks(trackSpacing);
-    
+    numTracks = floor(height/(trackSpacing/1.5));
+    tracks = createTracks(trackSpacing, numTracks);
 
-    for(let i = 0; i < 10; i++) {
+    for(let i = 0; i < numTracks; i++) {
         trains.push(new Train(trainCounter++, tracks, trackSpacing, i))
     }
 }
@@ -30,12 +31,11 @@ function draw() {
     checkTrainProximity(trains);
 }
 
-function createTracks(spacing) {
-    const numTracks = floor(height/spacing) - 1;
+function createTracks(spacing, numTracks) {
     let trackPositions = [];
     
     for(let i = 0; i < numTracks; i++) {
-        trackPositions.push((i+1)*spacing)
+        trackPositions.push((i+1)*(spacing/1.5))
     }
     return trackPositions;
  }
@@ -43,9 +43,16 @@ function createTracks(spacing) {
  function drawTracks(tracks) {
     for(let i = 0; i < tracks.length; i++) {
         const trackY = tracks[i]
-        text(i, 5, trackY)
+        //text(i, 5, trackY)
+        for(let j = 0; j < width; j+=8) {
+            strokeWeight(2)
+            stroke(0, 10, 50)
+            line(j, trackY+7, j+5, trackY-2)
+        }
+        strokeWeight(1)
+        stroke(0)
         line(0, trackY, width, trackY)
-        //line(0, i * spacing - 5, width, i * spacing - 5)
+        line(0, trackY+5, width, trackY+5)
     }
  }
 
