@@ -2,14 +2,14 @@ class TrainCar {
     constructor(carWidth, speed, carNumber, color, moveRight) {
         // colorMode(HSL)
         // this.color = color(random(360), 100, 50);
-        this.color = color
+        this.color = "#" + color
         this.cornerRadius = 3;
         this.width = carWidth;
         this.height = carWidth/3;
         this.rotateSpeed = speed
         this.rotateAmount = 0;
-        this.numSpokes = 6;
-        this.wheelSize = this.width/6;
+        this.numSpokes = 4;
+        this.wheelSize = this.width/8;
         this.carNumber = carNumber;
         this.moveRight = moveRight
     }
@@ -20,12 +20,12 @@ class TrainCar {
             translate(position.x, position.y-this.height-this.wheelSize/4)
             push()
                 // bob up and down
-                translate(0, sin(frameCount*15, -1, 1, -20, 20))
+                translate(0, sin(frameCount*10, -1, 1, -20, 20))
                 if(this.carNumber === 0) {
                     if(this.moveRight){
-                        rect(0, 0, this.width, this.height, this.cornerRadius, this.cornerRadius*4, this.cornerRadius, this.cornerRadius)
+                        rect(0, 0, this.width, this.height, this.cornerRadius, this.cornerRadius*10, this.cornerRadius, this.cornerRadius)
                     } else {
-                        rect(0, 0, this.width, this.height, this.cornerRadius*4, this.cornerRadius, this.cornerRadius, this.cornerRadius)
+                        rect(0, 0, this.width, this.height, this.cornerRadius*10, this.cornerRadius, this.cornerRadius, this.cornerRadius)
                     }
                     
                 } else {
@@ -39,14 +39,16 @@ class TrainCar {
         
 
         // create wheels
-        this.drawWheel(this.width/5)
-        this.drawWheel(4*this.width/5)
+        this.drawWheel(1*this.width/10)
+        this.drawWheel(2.5*this.width/10)
+        this.drawWheel(7.5*this.width/10)
+        this.drawWheel(9*this.width/10)
         pop()
 
     }
 
     drawWheel(location) {
-        fill(80)
+        fill(200)
         push()
         translate(location, this.height)
         rotate(this.rotateAmount+=this.rotateSpeed)

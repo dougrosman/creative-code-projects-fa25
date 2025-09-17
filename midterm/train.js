@@ -1,6 +1,6 @@
 class Train {
 
-    constructor(id, tracks, carWidth, trackNumber) {
+    constructor(id, tracks, carWidth, trackNumber, palette) {
         this.trainId = id;
         this.carWidth = carWidth;
         this.numCars = floor(random(2, 10))
@@ -9,12 +9,13 @@ class Train {
         this.numCouplers = this.numCars-1
 
         colorMode(HSL)
-        this.color = color(random(360), 100, 70);
+        // this.color = color(random(360), 100, 70);
+        this.colorPalette = palette;
 
         //this.trackNumber = floor(random(tracks.length))
         this.trackNumber = trackNumber
         this.moveRight = random(1) < 0.5 ? true : false
-        this.speed = this.moveRight ? random(1, 5): -random(1, 5)
+        this.speed = this.moveRight ? random(1, 4): -random(1, 4)
         this.trainLength = (this.numCars * carWidth) + (this.numCouplers * this.couplerWidth)
 
         const xPos = this.moveRight ? -this.trainLength : width + this.carWidth;
@@ -32,9 +33,9 @@ class Train {
         let cars = []
         for(let i = 0; i < this.numCars; i++) {
             if(this.moveRight){
-                cars.unshift(new TrainCar(this.carWidth, this.speed, i, this.color, this.moveRight))    
+                cars.unshift(new TrainCar(this.carWidth, this.speed, i, random(this.colorPalette), this.moveRight))    
             } else {
-                cars.push(new TrainCar(this.carWidth, this.speed, i, this.color, this.moveRight))
+                cars.push(new TrainCar(this.carWidth, this.speed, i, random(this.colorPalette), this.moveRight))
             }
         }
         return cars;
@@ -56,7 +57,7 @@ class Train {
             } else {
                 carXPosition = this.position.x + carPosition;
             }
-            const finalPostion = createVector(carXPosition, this.position.y)
+            const finalPostion = createVector(carXPosition, this.position.y+3)
             car.draw(finalPostion)
         })
     }
