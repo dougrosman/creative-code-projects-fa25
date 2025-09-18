@@ -1,7 +1,7 @@
 let trains = [];
 let tracks = [];
 let trainCounter = 0;
-const trackSpacing = 100;
+const trackSpacing = 50;
 let whistle;
 let numTracks;
 let colorPalettes;
@@ -84,15 +84,15 @@ function checkTrainProximity(trains) {
         ) {
           fill(0);
 
-        //   if (!currentTrain.hasBlown) {
-        //     whistle.play();
-        //     currentTrain.hasBlown = true;
-        //   }
+          if (!currentTrain.hasBlown) {
+            whistle.play();
+            currentTrain.hasBlown = true;
+          }
 
-        //   if (!checkTrain.hasBlown) {
-        //     whistle.play();
-        //     checkTrain.hasBlown = true;
-        //   }
+          if (!checkTrain.hasBlown) {
+            whistle.play();
+            checkTrain.hasBlown = true;
+          }
           const tSize = map(trackSpacing, 0, 200, 0, 44);
           textSize(tSize);
           textFont(courierFont);
