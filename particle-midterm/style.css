@@ -1,0 +1,21 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  /* background-color: green; */
+  background-image: url("cat.jpg");
+  background-size: cover;
+}
+canvas {
+  display: block;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  /* width: 80% !important; */
+  /* height: 80% !important; */
+  object-fit: contain;
+  border-radius: 10px;
+
+  box-shadow: 0 20px 20px -10px rgba(0, 0, 0, .5);
+}
+
