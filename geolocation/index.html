@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geolocation Tracker</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            margin: 0 0 2rem 0;
+            color: #333;
+        }
+
+        .location {
+            font-size: 1.5rem;
+            color: #555;
+            line-height: 2;
+        }
+
+        .label {
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .error {
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📍 Your Location</h1>
+        <div id="location" class="location">Requesting location...</div>
+    </div>
+
+    <script>
+        const locationDiv = document.getElementById('location');
+
+        if ('geolocation' in navigator) {
+            navigator.geolocation.watchPosition(
+                (position) => {
+                    const lat = position.coords.latitude.toFixed(6);
+                    const lon = position.coords.longitude.toFixed(6);
+                    const accuracy = position.coords.accuracy.toFixed(1);
+                    
+                    locationDiv.innerHTML = `
+                        <div><span class="label">Latitude:</span> ${lat}</div>
+                        <div><span class="label">Longitude:</span> ${lon}</div>
+                        <div style="font-size: 1rem; margin-top: 1rem; color: #999;">
+                            Accuracy: ±${accuracy} meters
+                        </div>
+                    `;
+                },
+                (error) => {
+                    locationDiv.innerHTML = `<div class="error">Error: ${error.message}</div>`;
+                },
+                {
+                    enableHighAccuracy: true,
+                    maximumAge: 0
+                }
+            );
+        } else {
+            locationDiv.innerHTML = '<div class="error">Geolocation is not supported by your browser</div>';
+        }
+    </script>
+</body>
+</html>

@@ -7,7 +7,7 @@ const FILENAME = "PlotDemo01"
 
 p5.disableFriendlyErrors = true; // hush, p5
 
-let bDoExportSvg = true; 
+let bDoExportSvg = false; 
 let mySvgFont
 
 function preload() {

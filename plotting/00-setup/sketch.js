@@ -38,9 +38,15 @@ function drawSomething() {
     for(let x = 0; x < NUM_CIRCLES; x++) {
 
         if(x < NUM_CIRCLES/2) {
+            beginSvgGroup("redCircles");
+            stroke(255, 0, 0)
             circle(START + (x*STEP), height/2, x*SIZE)
+            endSvgGroup();
         } else {
+            beginSvgGroup("blueCircles");
+            stroke(0, 0, 255)
             circle(START + (x*STEP), height/2, (NUM_CIRCLES - x) * SIZE)
+            endSvgGroup();
         }
 
     }
